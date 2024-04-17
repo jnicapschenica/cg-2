@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html lang="rus">
+
+@@include('html/head.html',{
+"title": "М и АО КГ"
+})
+
+<body>
+    <div class="wrapper">
+        <!-- @@include('html/header.html', {}) -->
+        <main class="main">
+            <div class="main__container">
+                <section class="canvas">
+                    <div class="resize">
+                        <div class="resize__right">
+                            <div class="canvas__box" id="box">
+                                <canvas id="c1"></canvas>
+                            </div>
+                            <div class="NT">
+                                <div class="NT actions__action">
+                                    <p>Изменить N</p>
+                                    <div class="NT__rows">
+                                        <p>(+,0,0)</p>
+                                        <div class="buttons">
+                                            <button type="button" id="decrease_button_X" class="button">-</button>
+                                            <button type="button" id="increase_button_X" class="button">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="NT__rows">
+                                        <p>(0,+,0)</p>
+                                        <div class="buttons">
+                                            <button type="button" id="decrease_button_Y" class="button">-</button>
+                                            <button type="button" id="increase_button_Y" class="button">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="NT__rows">
+                                        <p>(0,0,+)</p>
+                                        <div class="buttons">
+                                            <button type="button" id="decrease_button_Z" class="button">-</button>
+                                            <button type="button" id="increase_button_Z" class="button">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="NT actions__action">
+                                    <p>Изменить T </p>
+                                    <div class="NT__rows">
+                                        <p>(+,0,0)</p>
+                                        <div class="buttons">
+                                            <button type="button" id="decrease_button_OX" class="button">-</button>
+                                            <button type="button" id="increase_button_OX" class="button">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="NT__rows">
+                                        <p>(0,+,0)</p>
+                                        <div class="buttons">
+                                            <button type="button" id="decrease_button_OY" class="button">-</button>
+                                            <button type="button" id="increase_button_OY" class="button">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="NT__rows">
+                                        <p>(0,0,+)</p>
+                                        <div class="buttons">
+                                            <button type="button" id="decrease_button_OZ" class="button">-</button>
+                                            <button type="button" id="increase_button_OZ" class="button">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="NT actions__action">
+                                    <p>Изменить F</p>
+                                    <div class="buttons">
+                                        <button type="button" id="decrease_button_F" class="button">-</button>
+                                        <button type="button" id="increase_button_F" class="button">+</button>
+                                    </div>
+                                </div>
+                                <div class="NT actions__action">
+                                    <p>scale</p>
+                                    <div class="buttons">
+                                        <button type="button" id="decrease_button_s" class="button">-</button>
+                                        <button type="button" id="increase_button_s" class="button">+</button>
+                                    </div>
+                                </div>
+                                <div class="NT actions__action">
+                                    <div class="buttons">
+                                        <button type="button" id="project_button_x" class="button">X</button>
+                                        <button type="button" id="project_button_-x" class="button">-X</button>
+                                    </div>
+                                    <div class="buttons">
+                                        <button type="button" id="project_button_y" class="button">Y</button>
+                                        <button type="button" id="project_button_-y" class="button">-Y</button>
+                                    </div>
+                                    <div class="buttons">
+                                        <button type="button" id="project_button_z" class="button">Z<button>
+                                                <button type="button" id="project_button_-z" class="button">-Z</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="actions">
+                    <div class="actions__container">
+                        <div class="actions__dots">
+                            <div class="actions__action">
+                                <p>Добавить или удалить точку</p>
+                                <form id="push_form">
+                                    <div class="dot">
+                                        <label for="push_X">Координата X:</label>
+                                        <input type="number" id="push_X" name="push_X" placeholder="X">
+                                        <label for="push_Y">Координата Y:</label>
+                                        <input type="number" id="push_Y" name="push_Y" placeholder="Y">
+                                        <label for="push_Z">Координата Z:</label>
+                                        <input type="number" id="push_Z" name="push_Z" placeholder="Z">
+                                    </div>
+                                    <div class="buttons">
+                                        <button type="button" id="push_button" class="button">ДОБАВИТЬ</button>
+                                        <button type="button" id="pop_button" class="button">УДАЛИТЬ</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="actions__action">
+                                <p>Добавить или удалить ребро</p>
+                                <form id="connect_form">
+                                    <div class="headers">
+                                        <p>Точка 1</p>
+                                        <p>Точка 2</p>
+                                    </div>
+                                    <div class="dots">
+                                        <div class="dot">
+                                            <label for="connect_X_1">Координата X:</label>
+                                            <input type="number" id="connect_X_1" name="connect_X_1" placeholder="X">
+                                            <label for="connect_Y_1">Координата Y:</label>
+                                            <input type="number" id="connect_Y_1" name="connect_Y_1" placeholder="Y">
+                                            <label for="connect_Z_1">Координата Z:</label>
+                                            <input type="number" id="connect_Z_1" name="connect_Z_1" placeholder="Z">
+                                        </div>
+                                        <div class="dot">
+                                            <label for="connect_X_2">Координата X:</label>
+                                            <input type="number" id="connect_X_2" name="connect_X_2" placeholder="X">
+                                            <label for="connect_Y_2">Координата Y:</label>
+                                            <input type="number" id="connect_Y_2" name="connect_Y_2" placeholder="Y">
+                                            <label for="connect_Z_2">Координата Z:</label>
+                                            <input type="number" id="connect_Z_2" name="connect_Z_2" placeholder="Z">
+                                        </div>
+                                    </div>
+                                    <div class="buttons">
+                                        <button type="button" id="connect_button" class="button">СОЕДИНИТЬ</button>
+                                        <button type="button" id="disconnect_button" class="button">УДАЛИТЬ</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="actions__action">
+                                <button type="button" id="clear_button" class="button">ОЧИСТИТЬ ОБЛАСТЬ</button>
+                                <button type="button" id="affine_button" class="button">ПРИМЕНИТЬ АФФИННЫЕ
+                                    ПРЕОБРАЗОВАНИЯ</button>
+                                <button type="button" id="reset_affine_button" class="button">СБРОСИТЬ
+                                    ПРЕОБРАЗОВАНИЯ</button>
+                                <button type="button" id="reset_button" class="button">ВЕРНУТЬСЯ К НАЧАЛУ
+                                    КООРДИНАТ</button>
+                            </div>
+                        </div>
+                        <div class="actions__affines">
+                            <div class="actions__action">
+                                <p>Переместить на</p>
+                                <form id="translation_form">
+                                    <div class="dot">
+                                        <label for="translation_X">Координата X:</label>
+                                        <input type="number" id="translation_X" name="translation_X" placeholder="X">
+                                        <label for="translation_Y">Координата Y:</label>
+                                        <input type="number" id="translation_Y" name="translation_Y" placeholder="Y">
+                                        <label for="translation_Z">Координата Z:</label>
+                                        <input type="number" id="translation_Z" name="translation_Z" placeholder="Z">
+                                    </div>
+                                    <div class="buttons">
+                                        <div class="button">
+                                            <input type="checkbox" id="translation" name="translation"
+                                                class="checkbox" />
+                                            <label for="translation">ПЕРЕМЕСТИТЬ</label>
+                                        </div>
+                                        <button type="button" id="translation_button" class="button">ПРИМЕНИТЬ
+                                            СРАЗУ</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="actions__action">
+                                <p>Масштабировать с коэффициентами</p>
+                                <form id="scale_form">
+                                    <div class="dot">
+                                        <label for="scale_X">по оси OX:</label>
+                                        <input type="number" id="scale_X" name="scale_X" placeholder="OX">
+                                        <label for="scale_Y">по оси OY:</label>
+                                        <input type="number" id="scale_Y" name="scale_Y" placeholder="OY">
+                                        <label for="scale_Z">по оси OZ:</label>
+                                        <input type="number" id="scale_Z" name="scale_Z" placeholder="OZ">
+                                    </div>
+                                    <div class="buttons">
+                                        <div class="button">
+                                            <input type="checkbox" id="scale" name="scale" class="checkbox" />
+                                            <label for="scale">МАСШТАБИРОВАТЬ</label>
+                                        </div>
+                                        <button type="button" id="scale_button" class="button">ПРИМЕНИТЬ
+                                            СРАЗУ</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="actions__action">
+                                <form id="rotate_form">
+                                    <div class="headers">
+                                        <p>Повернуть на</p>
+                                        <p>Вокруг</p>
+                                    </div>
+                                    <div class="dots">
+                                        <div class="dot">
+                                            <label for="rotate_phi">Угол phi:</label>
+                                            <input type="number" id="rotate_phi" name="rotate_phi" placeholder="phi">
+                                        </div>
+                                        <div class="dot">
+                                            <div class="button">
+                                                <input type="checkbox" id="rotate_OX" name="rotate_OX"
+                                                    class="checkbox" />
+                                                <label for="rotate_OX">оси абсцисс</label>
+                                            </div>
+                                            <div class="button">
+                                                <input type="checkbox" id="rotate_OY" name="rotate_OY"
+                                                    class="checkbox" />
+                                                <label for="rotate_OY">оси ординат</label>
+                                            </div>
+                                            <div class="button">
+                                                <input type="checkbox" id="rotate_OZ" name="rotate_OZ"
+                                                    class="checkbox" />
+                                                <label for="rotate_OZ">оси аппликат</label>
+                                            </div>
+                                            <div class="button">
+                                                <input type="checkbox" id="rotate_edge" name="rotate_edge"
+                                                    class="checkbox" />
+                                                <label for="rotate_edge">ребра</label>
+                                                <select id="rotate_edge_select" name="rotate_edge_select">
+                                                    <option value="1" selected>1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="buttons">
+                                        <div class="button">
+                                            <input type="checkbox" id="rotate" name="rotate" class="checkbox" />
+                                            <label for="rotate">ПОВЕРНУТЬ</label>
+                                        </div>
+                                        <button type="button" id="rotate_button" class="button">ПРИМЕНИТЬ
+                                            СРАЗУ</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="mirrors">
+                                <div class="mirrors__1">
+                                    <div class="actions__action">
+                                        <p>Отразить относительно плоскости YZ</p>
+                                        <form id="mirror_YZ_form">
+                                            <div class="buttons">
+                                                <div class="button">
+                                                    <input type="checkbox" id="mirror_YZ" name="mirror_YZ"
+                                                        class="checkbox" />
+                                                    <label for="mirror_YZ">ОТРАЗИТЬ</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="actions__action">
+                                        <p>Отразить относительно плоскости ZX</p>
+                                        <form id="mirror_ZX_form">
+                                            <div class="buttons">
+                                                <div class="button">
+                                                    <input type="checkbox" id="mirror_ZX" name="mirror_ZX"
+                                                        class="checkbox" />
+                                                    <label for="mirror_ZX">ОТРАЗИТЬ</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="actions__action">
+                                        <p>Отразить относительно плоскости XY</p>
+                                        <form id="mirror_XY_form">
+                                            <div class="buttons">
+                                                <div class="button">
+                                                    <input type="checkbox" id="mirror_XY" name="mirror_XY"
+                                                        class="checkbox" />
+                                                    <label for="mirror_XY">ОТРАЗИТЬ</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="mirrors__1">
+                                    <div class="actions__action">
+                                        <p>Отразить относительно оси OX</p>
+                                        <form id="mirror_OX_form">
+                                            <div class="buttons">
+                                                <div class="button">
+                                                    <input type="checkbox" id="mirror_OX" name="mirror_OX"
+                                                        class="checkbox" />
+                                                    <label for="mirror_OX">ОТРАЗИТЬ</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="actions__action">
+                                        <p>Отразить относительно оси OY</p>
+                                        <form id="mirror_OY_form">
+                                            <div class="buttons">
+                                                <div class="button">
+                                                    <input type="checkbox" id="mirror_OY" name="mirror_OY"
+                                                        class="checkbox" />
+                                                    <label for="mirror_OY">ОТРАЗИТЬ</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="actions__action">
+                                        <p>Отразить относительно оси OZ</p>
+                                        <form id="mirror_OZ_form">
+                                            <div class="buttons">
+                                                <div class="button">
+                                                    <input type="checkbox" id="mirror_OZ" name="mirror_OZ"
+                                                        class="checkbox" />
+                                                    <label for="mirror_OZ">ОТРАЗИТЬ</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="mirrors__1">
+                                    <div class="actions__action">
+                                        <p>Отразить относительно начала координат</p>
+                                        <form id="mirror_XYZ_form">
+                                            <div class="buttons">
+                                                <div class="button">
+                                                    <input type="checkbox" id="mirror_XYZ" name="mirror_XYZ"
+                                                        class="checkbox" />
+                                                    <label for="mirror_XYZ">ОТРАЗИТЬ</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="actions__action">
+                                <p>Отразить относительно оси, которая проходит через точки</p>
+                                <form id="mirror_form">
+                                    <div class="headers">
+                                        <p>Точка 1</p>
+                                        <p>Точка 2</p>
+                                    </div>
+                                    <div class="dots">
+                                        <div class="dot">
+                                            <label for="mirror_X_1">Координата X:</label>
+                                            <input type="number" id="mirror_X_1" name="mirror_X_1" placeholder="X">
+                                            <label for="mirror_Y_1">Координата Y:</label>
+                                            <input type="number" id="mirror_Y_1" name="mirror_Y_1" placeholder="Y">
+                                        </div>
+                                        <div class="dot">
+                                            <label for="mirror_X_2">Координата X:</label>
+                                            <input type="number" id="mirror_X_2" name="mirror_X_2" placeholder="X">
+                                            <label for="mirror_Y_2">Координата Y:</label>
+                                            <input type="number" id="mirror_Y_2" name="mirror_Y_2" placeholder="Y">
+                                        </div>
+                                    </div>
+                                    <div class="buttons">
+                                        <div class="button">
+                                            <input type="checkbox" id="mirror" name="mirror" class="checkbox" />
+                                            <label for="mirror">ОТРАЗИТЬ</label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div> -->
+                            <!-- <div class="actions__action">
+                                <p>Масштабировать относительно осей, которые пересекаются в точке</p>
+                                <form id="scaleOX_form">
+                                    <div class="dot">
+                                        <label for="scaleOX_X_1">Координата X:</label>
+                                        <input type="number" id="scaleOX_X_1" name="scaleOX_X_1" placeholder="X">
+                                        <label for="scaleOX_Y_1">Координата Y:</label>
+                                        <input type="number" id="scaleOX_Y_1" name="scaleOX_Y_1" placeholder="Y">
+                                    </div>
+                                    <div class="dot">
+                                        <label for="scaleOX_X">с коэффициентом</label>
+                                        <input type="number" id="scaleOX_X" name="scaleOX_X" placeholder="k">
+                                    </div>
+                                    <p>по оси, которая также проходит через точку</p>
+                                    <div class="dot">
+                                        <label for="scaleOX_X_2">Координата X:</label>
+                                        <input type="number" id="scaleOX_X_2" name="scaleOX_X_2" placeholder="X">
+                                        <label for="scaleOX_Y_2">Координата Y:</label>
+                                        <input type="number" id="scaleOX_Y_2" name="scaleOX_Y_2" placeholder="Y">
+                                    </div>
+                                    <div class="dot">
+                                        <label for="scaleOX_Y">и с коэффициентом по перпендикулярной ей оси</label>
+                                        <input type="number" id="scaleOX_X" name="scaleOX_X" placeholder="m">
+                                    </div>
+                                    <div class="buttons">
+                                        <div class="button">
+                                            <input type="checkbox" id="scaleOX" name="scaleOX" class="checkbox" />
+                                            <label for="mirror">МАСШТАБИРОВАТЬ</label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div> -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <!-- @@include('html/footer.html', {}) -->
+        <script src="js/app.min.js"></script>
+    </div>
+</body>
+
+</html>
